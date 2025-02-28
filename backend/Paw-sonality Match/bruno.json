@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Paw-sonality Match",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
