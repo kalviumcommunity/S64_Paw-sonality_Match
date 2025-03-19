@@ -1,6 +1,11 @@
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Quiz from './pages/Quiz';
+import Result from './pages/Result';
+
 // src/App.js
-import React from 'react';
-import DogBreed from './components/DogBreed';
+
 
 function App() {
   // Dummy data for a dog breed
@@ -12,16 +17,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Paw-sonality Match</h1>
-      <h2>Find Your Perfect Dog Match</h2>
-      <DogBreed
-        breed={dogBreedData.breed}
-        description={dogBreedData.description}
-        temperament={dogBreedData.temperament}
-        image={dogBreedData.image}
-      />
-    </div>
+
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/quiz/:questionIndex" element={<Quiz />} />
+        <Route path="/result/:dogBreed" element={<Result />} />
+      </Routes>
+    </Router>
   );
 }
 
