@@ -4,7 +4,6 @@ const connectDB = require("./config/db");
 const dogBreedRoutes = require("./routes/dogBreed");
 const quizRoutes = require("./routes/quiz");
 
-
 const app = express();
 app.use(express.json());
 app.use(cors());
