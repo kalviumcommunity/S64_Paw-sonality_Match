@@ -1,12 +1,8 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Quiz from './pages/Quiz';
 import Result from './pages/Result';
-
-// src/App.js
-
-
+import AddEntity from './pages/AddEntity';
 function App() {
   // Dummy data for a dog breed
   const dogBreedData = {
@@ -23,6 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/quiz/:questionIndex" element={<Quiz />} />
         <Route path="/result/:dogBreed" element={<Result />} />
+
+        <Route path="/add-entity" element={<AddEntity />} />
+
       </Routes>
     </Router>
   );

@@ -1,22 +1,27 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
-const dogBreedRoutes = require("./routes/dogBreed");
-const quizRoutes = require("./routes/quiz");
+
+const express = require('express');
+const cors = require('cors');
+
 
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-connectDB();
 
-app.use('/api/dogbreeds', dogBreedRoutes);
-app.use('/api/quiz', quizRoutes);
+let entities = [];
+let id = 1;
 
-app.get("/", (req, res) => {
-  res.send("Welcome to Paw-sonality Match");
+app.get('/entities', (req, res) => {
+  res.json(entities);
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.post('/entities', (req, res) => {
+  const { name } = req.body;
+  const newEntity = { id: id++, name };
+  entities.push(newEntity);
+  res.status(201).json(newEntity);
+});
+
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
