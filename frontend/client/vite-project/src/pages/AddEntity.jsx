@@ -15,18 +15,21 @@ const AddEntity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newEntity = { name };
-
+  
     const res = await fetch("http://localhost:5000/entities", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newEntity),
     });
-
-    if (res.ok) {
-      const addedEntity = await res.json();
-      setEntities((prev) => [...prev, addedEntity]);
-      setName("");
+  
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error);
+      return;
     }
+  
+    setEntities((prev) => [...prev, data]);
+    setName("");
   };
 
   const handleEdit = (entity) => {
@@ -36,22 +39,26 @@ const AddEntity = () => {
 
   const handleUpdate = async () => {
     if (!editId) return;
-
+  
     const res = await fetch(`http://localhost:5000/entities/${editId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: editName }),
     });
-
-    if (res.ok) {
-      setEntities((prev) =>
-        prev.map((entity) =>
-          entity.id === editId ? { ...entity, name: editName } : entity
-        )
-      );
-      setEditId(null);
-      setEditName("");
+  
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error);
+      return;
     }
+  
+    setEntities((prev) =>
+      prev.map((entity) =>
+        entity.id === editId ? { ...entity, name: editName } : entity
+      )
+    );
+    setEditId(null);
+    setEditName("");
   };
 
   const handleDelete = async (id) => {
